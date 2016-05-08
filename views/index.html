@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Food Matcher</title>
+</head>
+<body>
+
+<form method="GET" action="/"> 
+  <label>Location</label> <input name="location" type="text"></input> <br>
+  <label>Food Preference</label> <input name="search" type="text"></input><br>
+  <button type="submit">Submit</button>
+</form>
+
+<div id="resturant-list">
+  {% for place in places %}
+    <li id="{{tweet.uniqID}}" class="tweet">
+      <!-- <img src="http://placehold.it/50x50" /> -->
+      <div class="tweet-text">
+        <a href="/users/{{tweet.name}}"><strong>{{place.name}}</strong></a><br/>
+        {{tweet.text}}
+      </div>
+    </li>
+  {% endfor %}
+</div>  
+
+</body>
+</html>
