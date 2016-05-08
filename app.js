@@ -13,13 +13,10 @@ var Preference = require('./models/preference');
 var Users = require('./models/users');
 
 // swig setup 
-
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'html');
 app.engine('html', swig.renderFile);
 swig.setDefaults({ cache: false });
-
-
 
 //sync our models
 Users.User.sync({force:force})

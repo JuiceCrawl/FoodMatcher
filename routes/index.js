@@ -9,22 +9,33 @@ module.exports = router;
 
 
 router.get('/',function(req,res,next){
-  console.log(req.body.location);
+  
+  if(!req.query.clicked){
+    res.render('index');
+    return;
+  }
+  
+  //on button logic?
+  if(!req.query.location ||!req.query.term ){
+    var errorMessage = "Please Enter a Location and Search Term";
+    res.render('index',{'error':errorMessage});
+    return;
+  }
 
-  var location = req.body.location || 'New York';
-  var term = req.body.term || 'vegan';
+  var location = req.query.location || 'New York';
+  var term = req.query.term || 'vegan';
 
   yelp.search({ term: term, location: location })
   .then(function (data) {
-    console.log(data.businesses[0].name);
     res.render('index', {places: data.businesses});
   })
   .catch(function (err) {
-    console.error(err);
+        console.error(err.data);
+    res.render('index', {error: JSON.parse(err.data).error.text});
   });
 
 });
 
-router.post('/', function(req, res, next){
+// router.post('/', function(req, res, next){
 
-});
+// });
