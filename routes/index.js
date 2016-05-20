@@ -4,7 +4,6 @@ var Preference = require('../models/preference');
 var User = require('../models/users');
 var yelp = require('../lib/yelp.js');
 
-
 module.exports = router;
 
 
@@ -17,29 +16,22 @@ router.get('/',function(req,res,next){
   }
   
   //on button logic?
-  if(!req.query.cls & !req.query.location ||!req.query.term ){
+  if(!req.query.location ||!req.query.term ){
     var errorMessage = "Please Enter a Location and Search Term";
     res.render('index',{'error':errorMessage});
     return;
   }
-  var cls = req.query.cls;
+
   var location = req.query.location;
-  var term = req.query.term || 'vegan';
+  var term = req.query.term;
 
-
-
-  // yelp.search({ term: term, location: location, cls: cls })
   yelp.search({ term: term, location: location })
   .then(function (data) {
     res.render('index', {places: data.businesses});
   })
   .catch(function (err) {
-        console.error(err.data);
-    res.render('index', {error: JSON.parse(err.data).error.text});
+    console.error(err.data);
+  res.render('index', {error: JSON.parse(err.data).error.text});
   });
 
 });
-
-// router.post('/', function(req, res, next){
-
-// });

@@ -8,8 +8,6 @@ function getLocation() {
     }
 }
 
-
-
 function showPosition(position) {
   // Get Lat Long
   var lat = position.coords.latitude;
@@ -21,25 +19,23 @@ function showPosition(position) {
       return data.results[0].formatted_address;
     })
     .then(function(location){
-      //
         $("input[name='location']").val(location);
         Cookies.set('location', location);
-
     });
 
 }
-// if there is a cookie with location use that 
-// else
+
+// If cookie location exsists, set the form input. Otherwise get geolocation to set form. 
 var cookieLoc = Cookies.get('location');
 if(cookieLoc){
   $("input[name='location']").val(cookieLoc);
 }else{
   getLocation();
 }
-//
 
+//on submit, save cookie location
 $( "#searchForm" ).submit(function( event ) {
   var enteredLocation = $("input[name='location']").val();
-  Cookies.set('location',enteredLocation);
+  Cookies.set('location', enteredLocation);
 });
 
