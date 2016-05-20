@@ -12,12 +12,12 @@ var Preference = require('./models/preference');
 var Users = require('./models/users');
 
 // swig setup 
-app.set('views', (__dirname + '/views'));
+app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.engine('html', swig.renderFile);
 swig.setDefaults({ cache: false });
 
-//sync our models
+//sync our models and listen on server
 Users.User.sync({force:force})
 .then(function () {
     return Preference.sync({force:force});
@@ -36,7 +36,9 @@ Users.User.sync({force:force})
 app.use(morgan('dev'));
 
 app.use(express.static(__dirname + '/public'));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 
+app.use('/js-cookie',express.static(__dirname+'/node_modules/js-cookie/src'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

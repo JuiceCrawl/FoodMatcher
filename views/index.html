@@ -6,34 +6,39 @@
 
   <!-- Custom styles for this template -->
   <link href="/stylesheet/styles.css" rel="stylesheet">
+  <script src="/jquery/jquery.min.js"></script>
+  <script src="/js-cookie/js.cookie.js"></script>
+
+  <script defer src="/js/app.js"></script>
 </head>
-<body>
-<form method="GET" action="/" id="searchForm"> 
-  <label>Location</label> <input name="location" type="text"></input><br>
-  <label>Food Preference</label> <input name="term" type="text"></input><br>
-  <input name="clicked" type="hidden" value="true"></input><br>
-  <button type="submit">Submit</button>
-</form>
-<br> 
-<div id="error_message">
-<p> {{error}}</p>
-</div>
+  <body>
 
-<div id="resturant-list">
-  {% for place in places %}
-    <li class="place">
-      <!-- <img src="http://placehold.it/50x50" /> -->
-      <div class="place-info">
-        <a href="{{place.url}}"><strong>{{place.name}}</strong></a> <span>Rating: {{place.rating}}</span>
-        <br/>
-        
-        <p> 
-        {{place.snippet_text}}
-        </p>
-      </div>
-    </li>
-  {% endfor %}
-</div>  
+  <form method="GET" action="/" id="searchForm"> 
+    <label>Location</label> <input name="location" type="text"></input><br>
+    <label>Food Preference</label> <input name="term" type="text"></input><br>
+    <input name="clicked" type="hidden" value="true"></input><br>
+    <button type="submit">Submit</button>
+  </form>
+  <br> 
+  <div id="error_message">
+  <p> {{error}}</p>
+  </div>
 
-</body>
+  <div id="resturant-list">
+    {% for place in places %}
+      <li class="place">
+        <!-- <img src="http://placehold.it/50x50" /> -->
+        <div class="place-info">
+          <a href="{{place.url}}"><strong>{{place.name}}</strong></a> <span>Rating: {{place.rating}}</span>
+          <br/>
+          
+          <p> 
+          {{place.snippet_text}}
+          </p>
+        </div>
+      </li>
+    {% endfor %}
+  </div>  
+
+  </body>
 </html>

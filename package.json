@@ -11,6 +11,8 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "jquery": "^2.2.3",
+    "js-cookie": "^2.1.1",
     "pg": "^4.5.5",
     "pg-hstore": "^2.3.2",
     "sequelize": "^3.23.0",
